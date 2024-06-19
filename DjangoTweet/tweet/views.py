@@ -26,7 +26,7 @@ def tweet_create(request):
 def tweet_edit(request, tweet_id):
     tweet = get_object_or_404(Tweet, pk=tweet_id, user=request.user)
     if request.method == 'POST':
-        form = TweetForm(request.POST, request.FILES, instance=Tweet)
+        form = TweetForm(request.POST, request.FILES, instance=tweet)
         if form.is_valid():
             tweet = form.save(commit=False)
             tweet.user = request.user
@@ -37,7 +37,7 @@ def tweet_edit(request, tweet_id):
     return render(request,'tweet_form.html',{'form': form})
 
 def tweet_delete(request, tweet_id):
-    tweet = get_object_or_404(tweet_id, pk=tweet_id, user=request.user)
+    tweet = get_object_or_404(Tweet, pk=tweet_id, user=request.user)
     if request.method == 'POST':
         tweet.delete()
         return redirect('tweet_list')

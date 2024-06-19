@@ -1,12 +1,22 @@
 {% extends "layout.html" %}
 
 {% block title %}
-tweet template
+Create tweet
 {% endblock %}
 
 {% block content %}
 <div class="flex justify-center mt-10 text-5xl">
-    Tweet form page
+    <p>{% if form.instance.pk %} edit {% else %} Create {%endif%}</p>
+    <form method="post" enctype="multipart/form-data" class="form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+           Submit
+        </button>
+    </form>
+    <a href="{% url 'tweet_list' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Back to tweet list
+    </a>
 </div>
 
 {% endblock %}

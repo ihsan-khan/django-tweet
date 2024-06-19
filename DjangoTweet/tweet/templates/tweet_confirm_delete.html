@@ -5,8 +5,11 @@ tweet template
 {% endblock %}
 
 {% block content %}
-<div class="flex justify-center mt-10 text-5xl">
-    tweet confirmation page
-</div>
+<h2>Are you sure to delete the tweet</h2>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+    <a href="{% url 'tweet_list' %}">Back</a>
+</form>
 
 {% endblock %}

@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+tweet template
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for tweet in tweets %}
+    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+        <img class="w-full" src="{{ tweet.photo.url }}" alt="Sunset in the mountains">
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">{{ tweet.user}}</div>
+          <p class="text-gray-700 text-base">
+            {{ tweet.text }}
+          </p>
+        </div>
+        <div class="px-6 pt-4 pb-2">
+          <a href="{% url 'tweet_edit' tweet.id %}" class="inline-block bg-blue-700 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">Edit</a>
+          <a href="{% url 'tweet_delete' tweet.id %}" class="inline-block bg-red-700 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">Delete</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
